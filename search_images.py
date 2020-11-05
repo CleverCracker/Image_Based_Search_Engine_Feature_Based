@@ -22,4 +22,12 @@ searchImg = cv2.imread(searchImage['image_path'])
 plt.imshow(searchImg)
 feature = Features()
 searchFe = feature.feature_extrection(searchImg)
-feature_arr = feature.all_features()
+feature_arr = all_features()
+feature_arr = np.array(feature_arr)
+dists = np.linalg.norm(feature_arr-searchFe, axis=1)
+ids = np.argsort(dists)[:10]
+
+for id_img in ids:
+    imgread = cv2.imread(finalData[id_img]['image_path'])
+    plt.imshow(imgread)
+    plt.show()
